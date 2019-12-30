@@ -1,4 +1,9 @@
 import pandas as pd
+import sys
+
+if len(sys.argv) != 2:
+    print("Need 1 arguments: python moviePredictor.py <input.txt>")
+    sys.exit()
 
 r_cols = ['user_id', 'movie_id', 'rating'] #coloumn names for ratings DataFrame
 ratings = pd.read_csv('assets/u.data', sep='\t', names=r_cols, usecols=range(3), encoding="ISO-8859-1") #read ratings data
@@ -8,21 +13,14 @@ movies = pd.read_csv('assets/u.item', sep='|', names=m_cols, usecols=range(2), e
 
 ratings = pd.merge(movies, ratings) #join both tables
 
-ratings.head()
-
 userRatings = ratings.pivot_table(index=['user_id'],columns=['title'],values='rating')
-userRatings.head()
 
 corrMatrix = userRatings.corr()
-corrMatrix.head()
 
 corrMatrix = userRatings.corr(method='pearson', min_periods=100)
-corrMatrix.head()
 
-# myRatings = userRatings.loc[0].dropna()
-myRatings = pd.read_csv('input.csv', sep='|', names=['title', 'rating'], usecols=range(2), encoding="ISO-8859-1")
+myRatings = pd.read_csv(sys.argv[1], sep='|', names=['title', 'rating'], usecols=range(2), encoding="ISO-8859-1")
 myRatings.set_index('title', inplace=True)
-print(myRatings)
 
 simCandidates = pd.Series()
 for i in range(0, len(myRatings.index)):
