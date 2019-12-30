@@ -4,7 +4,7 @@ Using Item-Based Collaborative Filtering, this script recommends you movies base
 ### Execution
 run command:
 
-python moviePredictor.py < input.txt >
+python moviePredictor.py < input.csv >
 
 ### Input
 A .csv file with the with the tehe csv file in the form
