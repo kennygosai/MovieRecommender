@@ -1,6 +1,11 @@
 # MovieRecommender
 Using Item-Based Collaborative Filtering, this script recommends you movies based on how you rated movies.
 
+### Execution
+run command:
+
+python moviePredictor.py < input.txt >
+
 ### Input
 A .csv file with the with the tehe csv file in the form
 
